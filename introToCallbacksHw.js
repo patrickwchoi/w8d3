@@ -54,3 +54,26 @@ class Clock{
 let timer = new Clock();
 
 // what we learned: when you pass in a function as a callback, it loses context for this, which means it must be bound
+
+const readline = require('readline');
+    const reader = readline.createInterface({
+
+    input: process.stdin,
+    output: process.stdout
+    });
+
+function addNumbers(sum, numsLeft, completionCallback){
+  if (numsLeft>0){
+    numsLeft-=1
+    // get input from user
+    reader.question("what is your input", function (answer) {
+      console.log(`Hello ${answer}!`);
+    });
+    // input => number
+    // sum += number
+    // addNumbers(sum, numsLeft, completionCallback)
+  } else{
+    completionCallback(sum)
+  }
+}
+//addNumbers(0, 3, sum => console.log(`Total Sum: ${sum}`));
