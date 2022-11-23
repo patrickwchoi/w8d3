@@ -1,10 +1,4 @@
-// setInterval(printTime, 1000)
-// let step = 0
-// function printTime(){
-//   console.log(step)
-//   step++
-//   // console.log("Time")
-// }
+// Tom and Patrick's Clock Adventure
 
 class Clock{
   constructor(){
@@ -51,29 +45,33 @@ class Clock{
     this.printTime();
   }
 }
-let timer = new Clock();
+// let timer = new Clock();
 
 // what we learned: when you pass in a function as a callback, it loses context for this, which means it must be bound
 
 const readline = require('readline');
-    const reader = readline.createInterface({
-
-    input: process.stdin,
-    output: process.stdout
-    });
+const reader = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
 function addNumbers(sum, numsLeft, completionCallback){
   if (numsLeft>0){
-    numsLeft-=1
-    // get input from user
-    reader.question("what is your input", function (answer) {
-      console.log(`Hello ${answer}!`);
+    numsLeft -= 1;
+    reader.question("What is your input:  ", function (answer) {
+      sum += parseInt(answer);
+      addNumbers(sum, numsLeft, completionCallback);
     });
-    // input => number
-    // sum += number
-    // addNumbers(sum, numsLeft, completionCallback)
-  } else{
+  } else {
     completionCallback(sum)
   }
 }
-//addNumbers(0, 3, sum => console.log(`Total Sum: ${sum}`));
+
+// what we learned: this is an example of asynchronous programming, and we didn't have to bind
+// our callback function because we just passed in result as an arg on line 66 and expected it
+// to be passed in on line 74 
+
+addNumbers(100, 3, function (result) {
+  console.log(`The result is ${result}`);
+  reader.close()
+})
