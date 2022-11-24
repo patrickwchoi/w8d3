@@ -75,3 +75,15 @@ addNumbers(100, 3, function (result) {
   console.log(`The result is ${result}`);
   reader.close()
 })
+
+
+Function.prototype.myBind = function(context) {
+  //goal is to return arrow func that captures this and context
+  //in anonymous func, we call func.prototype.apply on this passing in the context
+  const that = this;
+  return function (){
+    return that.apply(context) //that refers to the function we're calling on
+  }
+  // return this.apply(context) Why can't we do this??
+}
+//bind takes an arg
